@@ -24,7 +24,7 @@ To run the agent, simply run the following command:
 streamlit run app.py
 ```
 
-Alternatively, you can go on the Hugging Face Spaces page for this project and run it from there.
+Alternatively, you can go on the Hugging Face Spaces page for this project and [run it from there](https://huggingface.co/spaces/tsadoq/unofficial-haystack-documentation-agent).
 
 ## Disclaimer
 
