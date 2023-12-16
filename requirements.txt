@@ -1,4 +1,2 @@
-nltk==3.8.1
-farm-haystack==1.23.0
-torch==2.1.2
+farm-haystack[inference,preprocessing]==1.23.0
 streamlit==1.29.0
