@@ -19,13 +19,14 @@ if 'agent' not in st.session_state:
 
 # React to user input
 if prompt := st.chat_input("What is up?"):
-
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
-
-    response = st.session_state.agent.run(query=prompt)
+    chat_message = st.chat_message("assistant")
+    with chat_message:
+        with st.spinner("Thinking..."):
+            response = st.session_state.agent.run(query=prompt)
     answer = response["answers"][0].answer
-    with st.chat_message("assistant"):
-        st.markdown(answer)
+    chat_message.markdown(answer)
+
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": answer})
