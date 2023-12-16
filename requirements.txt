@@ -1,0 +1,4 @@
+nltk==3.8.1
+farm-haystack==1.23.0
+torch==2.1.2
+streamlit==1.29.0
