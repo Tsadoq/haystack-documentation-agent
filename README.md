@@ -26,6 +26,14 @@ streamlit run app.py
 
 Alternatively, you can go on the Hugging Face Spaces page for this project and [run it from there](https://huggingface.co/spaces/tsadoq/unofficial-haystack-documentation-agent).
 
+You can see a demo here:
+
+
+
+https://github.com/Tsadoq/haystack-documentation-agent/assets/28503469/ff9ca7e5-6710-434a-94d1-bce3f8be280c
+
+
+
 ## Disclaimer
 
 This project is a toy project and is not meant to be for any critical use. I am not responsible for any damage that
