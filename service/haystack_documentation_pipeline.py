@@ -23,10 +23,10 @@ def resolver_function(
     :return: a dictionary of parameters
     """
     return {
-        "query": query,
-        "tool_names_with_descriptions": agent.tm.get_tool_names_with_descriptions(),
-        "transcript": agent_step.transcript,
-        "memory": agent.memory.load(),
+        'query': query,
+        'tool_names_with_descriptions': agent.tm.get_tool_names_with_descriptions(),
+        'transcript': agent_step.transcript,
+        'memory': agent.memory.load(),
     }
 
 
@@ -35,17 +35,17 @@ def define_haystack_doc_searcher_tool() -> Tool:
     Defines the tool for searching the Haystack documentation.
     :return: the Haystack documentation searcher tool
     """
-    ranker = SentenceTransformersRanker(model_name_or_path="cross-encoder/ms-marco-MiniLM-L-12-v2", top_k=5)
+    ranker = SentenceTransformersRanker(model_name_or_path='cross-encoder/ms-marco-MiniLM-L-12-v2', top_k=5)
     retriever = return_retriever()
     haystack_docs = Pipeline()
-    haystack_docs.add_node(component=retriever, name="retriever", inputs=["Query"])
-    haystack_docs.add_node(component=ranker, name="ranker", inputs=["retriever"])
+    haystack_docs.add_node(component=retriever, name='retriever', inputs=['Query'])
+    haystack_docs.add_node(component=ranker, name='ranker', inputs=['retriever'])
 
     return Tool(
-        name="haystack_documentation_search_tool",
+        name='haystack_documentation_search_tool',
         pipeline_or_node=haystack_docs,
-        description="Searches the Haystack documentation for information.",
-        output_variable="documents",
+        description='Searches the Haystack documentation for information.',
+        output_variable='documents',
     )
 
 
@@ -57,10 +57,10 @@ def return_haystack_documentation_agent(openai_key: str) -> Agent:
     """
 
     agent_prompt_node = PromptNode(
-        "gpt-3.5-turbo-16k",
+        'gpt-3.5-turbo-16k',
         api_key=openai_key,
-        stop_words=["Observation:"],
-        model_kwargs={"temperature": 0.05},
+        stop_words=['Observation:'],
+        model_kwargs={'temperature': 0.05},
         max_length=10000,
     )
 
