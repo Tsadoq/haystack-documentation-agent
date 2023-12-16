@@ -1,6 +1,10 @@
+import os
+
 import streamlit as st
 
-st.title("Echo Bot")
+from service.haystack_documentation_pipeline import return_haystack_documentation_agent
+
+st.title("Haystack Documentation Chatbot")
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -10,16 +14,18 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+if 'agent' not in st.session_state:
+    st.session_state.agent = return_haystack_documentation_agent(openai_key=os.environ['OPENAI_KEY'])
+
 # React to user input
 if prompt := st.chat_input("What is up?"):
-    # Display user message in chat message container
+
     st.chat_message("user").markdown(prompt)
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    response = f"{prompt}"
-    # Display assistant response in chat message container
+    response = st.session_state.agent.run(query=prompt)
+    answer = response["answers"][0].answer
     with st.chat_message("assistant"):
-        st.markdown(response)
+        st.markdown(answer)
     # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": answer})
